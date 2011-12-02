@@ -1,0 +1,4 @@
+include README.md AUTHORS LICENSE
+recursive-include better500s/templates/better500s *
+recursive-include better500s/static/better500s *
+

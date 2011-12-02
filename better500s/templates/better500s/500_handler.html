@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>	
+	<script type="text/javascript" charset="utf-8">
+		$(function() {
+			$.ajax({
+			  url: "{{ajax_url}}",
+			  type: "POST",
+			  dataType: "json",
+              data: {'epoch':{{epoch}}, 'simple_traceback':$("input[name=simple_traceback]").val() },
+				success: function() {
+					console.log("Saved")
+				},
+
+          });
+		  $("#id_user_notes").focus()
+		  $(".traceback_header").click(function(){
+			$(".traceback_detail").slideToggle("fast");
+			$(".arrow").toggle();
+			return false;
+		  })
+		});
+	</script>
+	<style type="text/css" media="screen">
+		body, input, textarea {
+		    font-family: Arial, "Lucida Sans", Verdana, sans-serif;
+		}
+		.error_header {
+			font-size: 80px;
+			width: 100%;
+			text-align: center;
+			margin: 40px 0px 20px 0px;
+			color: #222;
+		}
+		.error_header img {
+			vertical-align: middle;
+			padding-bottom: 20px;
+			padding-right: 40px;
+		}
+		.instructions_and_form {
+			width: 70%;
+			margin: 10px auto;
+		}
+		.instructions_and_form .submit_button {
+			font-size: 20px;
+			background-color: #4D8A23;
+			color: #E5FCD2;
+			border-color: #316B17;
+			cursor: pointer;
+			padding: 4px 10px;
+			border-radius: 8px;
+			-moz-border-radius: 8px;
+			-webkit-border-radius: 8px;
+		    -moz-box-sizing: border-box;
+		    -opera-sizing: border-box;
+		    -webkit-box-sizing: border-box;
+		    -khtml-box-sizing: border-box;
+		    box-sizing: border-box;
+		    overflow: hidden;
+			white-space:nowrap;
+			border-width: 2px;
+			border-style: solid;
+		}
+		.instructions_and_form .submit_button:hover {
+			background-color: #4BA524;
+			color: #FFF;
+			border-color: #2E5C14;
+		}
+		#id_user_notes {
+			width: 100%;
+			font-size: 18px;
+			padding: 4px;
+			height: 200px;
+			border-color: #AAA;
+			border-width: 4px;
+			border-radius: 2px;
+			-moz-border-radius: 4px;
+			-webkit-border-radius: 4px;
+		    -moz-box-sizing: border-box;
+		    -opera-sizing: border-box;
+		    -webkit-box-sizing: border-box;
+		    -khtml-box-sizing: border-box;
+		    box-sizing: border-box;
+			margin-top: 10px;
+		}
+		.traceback_area {
+			width: 70%;
+			margin: 50px auto 0px auto;
+		}
+		.error_instructions {
+			font-size: 16px;
+		}
+		code.error_message {
+			font-size: 14px;
+			display: block;
+			margin-top: 20px;
+		}
+		form {
+			margin: 0px;
+		}
+		.down_arrow {
+			display: none;
+		}
+		.right_arrow {
+			
+		}
+		.traceback_detail {
+			display: none;
+			width: 100%;
+
+		}
+		.traceback_header {
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+<div class="five-hundred-page">
+	<div class="error_header">
+	Oh Dear.
+	</div>
+	<div class="instructions_and_form">
+	<div class="error_instructions">
+		Looks like we've hit a bug. The developers have been notified.
+		{% if exception_value %}<code class="error_message"><b>Error message:</b> {{exception_value|escape}}</code>{% else %}<br/>{% endif %}
+		<br/>To help us solve this problem, can you type what you were trying to do just now into the box below?
+	</div>
+	<form action="{{post_url}}" method="POST">
+		{% csrf_token %}
+		<input type="hidden" name="epoch" value="{{epoch}}"/>
+		<input type="hidden" name="simple_traceback" value="{{simple_traceback}}"/>
+		<textarea id="id_user_notes" name="user_notes" value=""></textarea>
+		<input class="submit_button" type="submit" value="Send Feedback"/>
+	</form>
+	</div>
+	<div class="traceback_area">
+		<div class="traceback_header">
+		<span class="arrow right_arrow">{% if MEDIA_URL %}<img src="{{MEDIA_URL}}images/right-arrow.png" />{% endif %}</span>
+		<span class="arrow down_arrow">{% if MEDIA_URL %}<img src="{{MEDIA_URL}}images/down-arrow.png" />{% endif %}</span>
+		Technical Details 
+		</div>
+		<pre class="traceback_detail">
+{{simple_traceback|linebreaks|cut:"\n"}}
+		</pre>
+	</div>
+</div>
+</body>
+</html>

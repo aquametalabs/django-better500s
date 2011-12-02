@@ -1,0 +1,16 @@
+{% autoescape off %}Hey Team,
+
+{{error_obj.user.get_profile.full_name}} sent us this error report:
+
+{{error_obj.user_notes}}
+
+Detail Page: 
+{{site}} {% url better_500_view_error error_obj.pk %}
+
+Exception Type: {{error_obj.exception_type}}
+Page Url: {{error_obj.page_url}}
+Error time: {{error_obj.error_time|date:"M j Y, fa"}}
+
+Thanks for fixing this!
+
+{% endautoescape %}

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<style type="text/css" media="screen">
+		body, input, textarea {
+		    font-family: Arial, "Lucida Sans", Verdana, sans-serif;
+		}
+		.error_header {
+			font-size: 80px;
+			width: 100%;
+			text-align: center;
+			margin: 40px 0px;
+		}
+		.error_header img {
+			vertical-align: middle;
+			padding-bottom: 20px;
+			padding-right: 40px;
+			
+		}
+		.instructions_and_form {
+			width: 70%;
+			margin: 10px auto;
+			text-align: center;
+		}
+		.buttons {
+			padding: 40px;
+
+		}
+		.link_button {
+			text-decoration: none;
+			font-size: 20px;
+			background-color: #257AED;
+			color: #EEE;
+			border-color: #3070D3;
+			cursor: pointer;
+			padding: 4px 10px;
+			border-radius: 8px;
+			-moz-border-radius: 8px;
+			-webkit-border-radius: 8px;
+		    -moz-box-sizing: border-box;
+		    -opera-sizing: border-box;
+		    -webkit-box-sizing: border-box;
+		    -khtml-box-sizing: border-box;
+		    box-sizing: border-box;
+		    overflow: hidden;
+			white-space:nowrap;
+			border-width: 2px;
+			border-style: solid;
+			margin: 0px 10px;
+		}
+		.link_button:hover {
+			background-color: #3C86F6;
+			color: #FFF;
+			border-color: #257AED;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="five-hundred-page">
+	<div class="error_header">
+	Thanks!
+	</div>
+	<div class="instructions_and_form">
+	<div class="error_instructions">
+		Your feedback has been saved. We'll get right on that, and let you get back to work!
+		<div class="buttons">
+		<a class="link_button" href="{% url home_page %}">Go Home</a>
+		{% if error_obj.page_url %}<a class="link_button"  href="{{error_obj.page_url}}">Go back to the previous page</a>{% endif %}		
+	</div>
+	</div>
+	</div>
+</body>
+</html>

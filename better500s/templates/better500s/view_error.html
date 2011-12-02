@@ -1,0 +1,73 @@
+{% load friendly_tags %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<style type="text/css" media="screen">
+		body, input, textarea {
+		    font-family: Arial, "Lucida Sans", Verdana, sans-serif;
+		}
+		body {
+			padding: 0px 20px;
+		}
+		.header {
+			font-size: 20px;
+			width: 100%;
+			margin: 0px 0px;
+			padding: 0px;
+		}
+		.basics {
+			color: #666;
+			padding: 7px 10px;
+			background-color: #EFFDE1;
+			border-radius: 8px;
+			-moz-border-radius: 8px;
+			-webkit-border-radius: 8px;
+			margin: 0px 10px;
+		}
+		.basics .noun {
+			color: #222;
+		}
+		.basics a {
+			color: #257AED;
+		}
+		.user_notes {
+			color: #222;
+			padding: 2px 0px;
+		}
+		#id_stacktrace_iframe {
+			width: 100%;
+			height: 600px;
+			border: 1px solid #CCC;
+			margin-top: 0px;
+		}
+		.stacktrace {
+			padding-top: 4px;
+		}
+		.all_btn {
+			float: right;
+			font-size: 12px;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">Details for the {{error_obj.exception_type}}.</div>
+	<div class="basics">
+		<div class="all_btn">
+			<a href="/admin/better500s/caughterror/?q={{error_obj.page_url|urlencode}}" target="_blank">See all errors for this page</a>
+		</div>
+		<span class="noun">{{error_obj.user.get_profile.full_name}}</span>
+		 was on 
+		<span class="noun">{{ error_obj.page_url|urlize}}</span>
+		 at 
+		<span class="noun">{{ error_obj.error_time|date:"l, M j Y, f a"}}</span>
+		<div class="user_notes"><b>User notes:</b> {{error_obj.user_notes|linebreaksbr}}</div>
+	</div>
+
+	
+	<div class="stacktrace">
+	Here's what happened.
+	<iframe id="id_stacktrace_iframe" src="{% url better_500_traceback_source error_obj.pk %}">
+	</iframe>
+
+</body>
+</html>

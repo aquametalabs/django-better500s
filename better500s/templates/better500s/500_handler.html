@@ -2,7 +2,8 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  	<script>window.jQuery || document.write('<script src="{{STATIC_URL}}better500s/js/jquery-1.6.2.min.js"><\/script>')</script>
 	<script type="text/javascript" charset="utf-8">
 		$(function() {
 			$.ajax({
@@ -13,7 +14,6 @@
 				success: function() {
 					console.log("Saved")
 				},
-
           });
 		  $("#id_user_notes").focus()
 		  $(".traceback_header").click(function(){
@@ -137,8 +137,8 @@
 	</div>
 	<div class="traceback_area">
 		<div class="traceback_header">
-		<span class="arrow right_arrow">{% if MEDIA_URL %}<img src="{{MEDIA_URL}}images/right-arrow.png" />{% endif %}</span>
-		<span class="arrow down_arrow">{% if MEDIA_URL %}<img src="{{MEDIA_URL}}images/down-arrow.png" />{% endif %}</span>
+		<span class="arrow right_arrow">{% if STATIC_URL %}<img src="{{STATIC_URL}}better500s/images/right-arrow.png" />{% endif %}</span>
+		<span class="arrow down_arrow">{% if STATIC_URL %}<img src="{{STATIC_URL}}better500s/images/down-arrow.png" />{% endif %}</span>
 		Technical Details 
 		</div>
 		<pre class="traceback_detail">

@@ -1,4 +1,4 @@
-{% load friendly_tags %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -55,7 +55,7 @@
 		<div class="all_btn">
 			<a href="/admin/better500s/caughterror/?q={{error_obj.page_url|urlencode}}" target="_blank">See all errors for this page</a>
 		</div>
-		<span class="noun">{{error_obj.user.get_profile.full_name}}</span>
+		<span class="noun">{{error_obj.user.get_profile}}</span>
 		 was on 
 		<span class="noun">{{ error_obj.page_url|urlize}}</span>
 		 at 

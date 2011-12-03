@@ -1,6 +1,8 @@
 import os
 
 from django.db import models
+from django.core.urlresolvers import reverse
+
 from better500s import BETTER_500_LOG_DIR, BETTER_500_UNCAUGHT_DIR
 
 class CaughtError(models.Model):
@@ -23,6 +25,10 @@ class CaughtError(models.Model):
     @property
     def epoch_file(self):
         return "%s.html" % (self.epoch_time)
+
+    @property
+    def view_url(self):
+        return reverse("better_500_view_error", args=(self.pk,) )
 
     @property
     def traceback_file_contents(self):

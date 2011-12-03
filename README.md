@@ -20,6 +20,7 @@ Usage
 	MIDDLEWARE_CLASSES += ("better500s.middleware.Better500s",)
 
 	# Set any optional settings (below)
+	BETTER_500_DEFAULT_RETURN_URL_NAME = "home_page"
 	BETTER_500_LOG_DIR = join(PROJECT_ROOT, 'logs', 'better_500')
 	BETTER_500_FROM_EMAIL = "foo@example.com"
 	BETTER_500_TO_EMAILS = ["bar@example.com",]
@@ -39,6 +40,9 @@ Usage
 
 
 ### Optional Settings:
+
+* `BETTER_500_DEFAULT_RETURN_URL_NAME` - The url name that the "Go Home" button should link to. If none, the button is hidden.
+	Defaults to None. 
 
 * `BETTER_500_LOG_DIR` - Where the full log traces should be stored.
 	Defaults to `PROJECT_ROOT/logs/better500s`.  

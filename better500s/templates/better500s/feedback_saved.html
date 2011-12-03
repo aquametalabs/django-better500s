@@ -66,7 +66,7 @@
 	<div class="error_instructions">
 		Your feedback has been saved. We'll get right on that, and let you get back to work!
 		<div class="buttons">
-		<a class="link_button" href="{% url home_page %}">Go Home</a>
+		{% if home_url %}<a class="link_button" href="{{ home_url }}">Go Home</a>{% endif %}
 		{% if error_obj.page_url %}<a class="link_button"  href="{{error_obj.page_url}}">Go back to the previous page</a>{% endif %}		
 	</div>
 	</div>

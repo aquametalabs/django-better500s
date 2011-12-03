@@ -3,7 +3,7 @@
 New 500 Error.  Here's the basics:
 
 Detail Page: 
-{{site}} {% url better_500_view_error error_obj.pk %}
+{{detail_page_url}}
 
 Exception Type: {{error_obj.exception_type}}
 Page Url: {{error_obj.page_url}}

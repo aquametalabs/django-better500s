@@ -56,7 +56,8 @@ class Better500s(object):
                     try:
                         context = {}
                         context['epoch'] = epoch
-                        context['MEDIA_URL'] = settings.MEDIA_URL
+                        context['MEDIA_URL'] = getattr(settings, "MEDIA_URL", None)
+                        context['STATIC_URL'] = getattr(settings, "STATIC_URL", None)
                         context['ajax_url'] = BETTER_500_AJAX_URL
                         context['post_url'] = BETTER_500_POST_URL
 

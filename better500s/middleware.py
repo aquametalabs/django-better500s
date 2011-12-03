@@ -26,9 +26,14 @@ class Better500s(object):
                 if not os.path.exists(folder):
                        os.makedirs(folder)
 
-                f = open(debug_log_file,"a")
-                f.write(resp._container[0])
-                f.close()
+                try:
+                    from django.core.files.storage import default_storage
+                    from django.core.files.base import ContentFile
+                    default_storage.save(debug_log_file, ContentFile(resp._container[0]))
+                except:
+                    f = open(debug_log_file,"a")
+                    f.write(resp._container[0])
+                    f.close()
 
                 return epoch
         except:

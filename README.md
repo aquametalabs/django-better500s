@@ -1,7 +1,7 @@
 Overview
 ========
 
-django-better500s is a library that makes 500 errors more user-friendly, and developer friendly.  It logs the full error traceback (as if it were in DEBUG mode), as well as a user's description of what they were trying to do.
+500 errors shouldn't ever happen.  But when they do, we should maximize what we get out of them. `django-better500s` makes 500s more useful by logging full tracebacks (like the ones you get in DEBUG mode), and gathering user feedback, seamlessly.
 
 Pull requests are quite welcome!
 
@@ -28,7 +28,7 @@ Usage
 
 	```
 
-4. (optional) Add in the urls:
+4. Add in the urls:
 
 	```
 	urlpatterns += patterns('',          
@@ -41,10 +41,7 @@ Usage
 
 ### Optional Settings:
 
-* `BETTER_500_DEFAULT_RETURN_URL_NAME` - The url name that the "Go Home" button should link to. If none, the button is hidden.
-	Defaults to `None`. 
-
-* `BETTER_500_LOG_DIR` - Where the full log traces should be stored.
+* `BETTER_500_LOG_DIR` - Where the full log traces should be stored (on `default_storage`, or failing that, locally).
 	Defaults to `"PROJECT_ROOT/logs/better500s"`.  
 
 * `BETTER_500_FROM_EMAIL` - The email that notifications should be sent from.
@@ -62,31 +59,47 @@ Usage
 * `BETTER_500_POST_URL` - URL for user crash report posting.
 	Defaults to `"better-500-saved/"`. 
 
+* `BETTER_500_DEFAULT_RETURN_URL_NAME` - The url name that the "Go Home" button should link to. If none, the button is hidden.
+	Defaults to `None`. 
 
 
 
-### How it works:
-1. 500 (only) caught
-2. Full debug page traceback is generated, saved to UNCAUGHT_DIR
-3. "We're sorry / Tell us what you were doing" page loads.
+How it works:
+=============
+
+1. 500 errors (only) are caught
+2. Full debug page traceback is generated, and saved to the `UNCAUGHT_DIR`
+3. A "We're sorry / Tell us what you were doing" page loads.
 4. On load, that page ajax pings the server.
-5. On ping, the view files the log into a date-organized folder, and emails the TO_EMAILs with a link
-6. If the user submits a report, that report is saved to the database, tied to the log file.  A second email is sent, with the user's details.
-7. An admin can click the view link, and see the full traceback, and any user details.
+5. On ping, the view files the log into a date-organized folder, and emails the `TO_EMAILs` with a link
+6. If the user submits a report, that report is saved to the database, tied to the log file.  A second email is sent, with the user's report.
+7. An admin can click the view link, and see the full traceback, and the user's report.
 
 
-### Templates and Customization
-500_handler.html
-feedback_saved.html
-view_error.html
+Templates and Customization
+===========================
 
-admin_email.txt
-error_with_notes_email.txt
+### Templates
 
-### Log storage, and backends
-Uses default_backend, falls back to local system.
+* `500_handler.html` - This template is what users see when a 500 occurs, and where they can submit their report. 
+
+* `feedback_saved.html` - If a user submits a report, this page is what they see. Links to the page that produced the error, and optionally, home.
+
+* `view_error.html` - Developer-side template for viewing captured 500s
+
+* `admin_email.txt` - Template for the 500 error email.
+
+* `error_with_notes_email.txt` - Template for the user bug report email.
 
 
+### Log file storage
+
+By default, `django-better500s` uses the `default_backend` to store error logs. If that fails, it falls back local file storage.
+
+
+Credits
+=======
+`django-better500s` was written by Steven Skoczen for Aquameta.
 
 
 

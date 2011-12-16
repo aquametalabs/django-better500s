@@ -67,11 +67,11 @@ Usage
 How it works:
 =============
 
-1. 500 errors (only) are caught
-2. Full debug page traceback is generated, and saved to the `UNCAUGHT_DIR`
+1. 500 errors (only) are caught.
+2. Full debug page traceback is generated, and saved to the `UNCAUGHT_DIR`.
 3. A "We're sorry / Tell us what you were doing" page loads.
 4. On load, that page ajax pings the server.
-5. On ping, the view files the log into a date-organized folder, and emails the `TO_EMAILs` with a link
+5. On ping, the view files the log into a date-organized folder, and emails the `TO_EMAILs` with a link.
 6. If the user submits a report, that report is saved to the database, tied to the log file.  A second email is sent, with the user's report.
 7. An admin can click the view link, and see the full traceback, and the user's report.
 
@@ -94,12 +94,12 @@ Templates and Customization
 
 ### Log file storage
 
-By default, `django-better500s` uses the `default_backend` to store error logs. If that fails, it falls back local file storage.
+By default, django-better500s uses the `default_backend` to store error logs. If that fails, it falls back local file storage.
 
 
 Credits
 =======
-`django-better500s` was written by Steven Skoczen for Aquameta.
+django-better500s was written by Steven Skoczen for Aquameta.
 
 
 

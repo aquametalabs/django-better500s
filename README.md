@@ -1,7 +1,7 @@
 Overview
 ========
 
-500 errors shouldn't ever happen.  But when they do, we should maximize what we get out of them. `django-better500s` makes 500s more useful by logging full tracebacks (like the ones you get in DEBUG mode), and gathering user feedback, seamlessly.
+django-better500s is a library that makes 500 errors more user-friendly, and developer friendly. It logs the full error traceback (as if it were in DEBUG mode), as well as a user's description of what they were trying to do.
 
 Pull requests are quite welcome!
 

@@ -9,10 +9,16 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 from better500s import BETTER_500_DEFAULT_RETURN_URL_NAME
 from better500s.helpers import exception_string
 from better500s.models import CaughtError
+
+try:
+    import telegram
+except:
+    telegram = None
 
 
 def create_caught_error(request, epoch, traceback, subject_prefix=""):
@@ -27,6 +33,8 @@ def create_caught_error(request, epoch, traceback, subject_prefix=""):
         subject = "%s500 - %s" % (subject_prefix, error_obj)
         body = render_to_string("better500s/admin_email.txt", locals(), context_instance=RequestContext(request))
         mail_admins(subject, body, fail_silently=True)
+        if telegram and getattr(settings, 'BETTER_500_NOTIFICATION_CHANNEL', False):
+            telegram.broadcast(settings.BETTER_500_NOTIFICATION_CHANNEL, subject, detail_page_url, add_to_queue=False)
     except:
         log = logging.getLogger("better500s")
         log.error(exception_string())
@@ -56,6 +64,8 @@ def user_error_submit(request):
             subject = " User Bug Report - %s" % (error_obj)
             body = render_to_string("better500s/error_with_notes_email.txt", locals(), context_instance=RequestContext(request))
             mail_admins(subject, body, fail_silently=True)
+            if telegram and getattr(settings, 'BETTER_500_NOTIFICATION_CHANNEL', False):
+                telegram.broadcast(settings.BETTER_500_NOTIFICATION_CHANNEL, subject, detail_page_url, add_to_queue=False)
             home_url = BETTER_500_DEFAULT_RETURN_URL_NAME
             if home_url:
                 try:

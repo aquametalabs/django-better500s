@@ -12,11 +12,11 @@ class CaughtError(models.Model):
     user = models.ForeignKey("auth.User", blank=True, null=True)
     error_time = models.DateTimeField(blank=True, null=True)
 
-    page_url = models.URLField(blank=True, null=True)
+    page_url = models.TextField(blank=True, null=True)
     epoch_time = models.IntegerField(blank=True, null=True, unique=True)
 
     simple_traceback = models.TextField(blank=True, null=True)
-    exception_type = models.CharField(blank=True, null=True, max_length=255)
+    exception_type = models.TextField(blank=True, null=True)
     user_notes = models.TextField(blank=True, null=True)
 
     def __unicode__(self):

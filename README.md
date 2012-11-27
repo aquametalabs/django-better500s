@@ -1,7 +1,10 @@
 Overview
 ========
 
-django-better500s is a library that makes 500 errors more user-friendly, and developer friendly. It logs the full error traceback (as if it were in DEBUG mode), as well as a user's description of what they were trying to do.
+django-better500s is a library that makes 500 errors more
+user-friendly, and more developer-friendly. It logs the full error
+traceback (as if it were in DEBUG mode), as well as a user's
+description of what they were trying to do.
 
 Pull requests are quite welcome!
 
@@ -17,6 +20,10 @@ Usage
 
 	```
 	INSTALLED_APPS += ("better500s",)
+
+    # If you have other exception-processing middleware, you should
+    # pay attention to what order you put middleware in. "At the end"
+    # should work fine for Better500s, though.
 	MIDDLEWARE_CLASSES += ("better500s.middleware.Better500s",)
 
 	# Set any optional settings (below)
@@ -63,7 +70,6 @@ Usage
 	Defaults to `None`. 
 
 
-
 How it works:
 =============
 
@@ -94,12 +100,10 @@ Templates and Customization
 
 ### Log file storage
 
-By default, django-better500s uses the `default_backend` to store error logs. If that fails, it falls back local file storage.
+By default, django-better500s uses the `default_backend` to store
+error logs. If that fails, it falls back local file storage.
 
 
 Credits
 =======
 django-better500s was written by Steven Skoczen for Aquameta.
-
-
-

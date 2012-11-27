@@ -1,6 +1,6 @@
+import logging
 import sys, os, time, datetime
 import traceback
-import logging
 
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
@@ -12,7 +12,8 @@ from django.template.loader import render_to_string
 from django.utils.encoding import smart_unicode
 from django.views.debug import technical_500_response
 
-from better500s import BETTER_500_LOG_DIR, BETTER_500_UNCAUGHT_DIR, BETTER_500_AJAX_URL, BETTER_500_POST_URL
+from better500s import (BETTER_500_LOG_DIR, BETTER_500_UNCAUGHT_DIR,
+                        BETTER_500_AJAX_URL, BETTER_500_POST_URL)
 from better500s.helpers import exception_string
 
 class Better500s(object):
@@ -28,7 +29,7 @@ class Better500s(object):
 
                 folder = os.path.join(BETTER_500_LOG_DIR, BETTER_500_UNCAUGHT_DIR)
                 debug_log_file = os.path.join(folder, epoch_file)
-            
+
                 if not os.path.exists(folder):
                        os.makedirs(folder)
 
@@ -88,4 +89,3 @@ class Better500s(object):
                     pass
 
         return None
-

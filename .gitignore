@@ -3,7 +3,9 @@
 *.pyc
 *.pyo
 *.swp
+*~
 pip-log.txt
 better500s.egg-info/*
 dist/*
 build/*
+django_better500s.egg-info

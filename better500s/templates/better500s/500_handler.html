@@ -124,18 +124,25 @@
 	Oh Dear.
 	</div>
 	<div class="instructions_and_form">
-	<div class="error_instructions">
-		Looks like we've hit a bug. The developers have been notified.
-		{% if exception_value %}<code class="error_message"><b>Error message:</b> {{exception_value|escape}}</code>{% else %}<br/>{% endif %}
-		<br/>To help us solve this problem, can you type what you were trying to do just now into the box below?
-	</div>
-	<form action="{{post_url}}" method="POST">
-		{% csrf_token %}
-		<input type="hidden" name="epoch" value="{{epoch}}"/>
-		<input type="hidden" name="simple_traceback" value="{{simple_traceback}}"/>
-		<textarea id="id_user_notes" name="user_notes" value=""></textarea>
-		<input class="submit_button" type="submit" value="Send Feedback"/>
-	</form>
+	  <div class="error_instructions">
+		Looks like we've hit a bug.
+		{% if exception_value %}<code class="error_message"><b>Error message:</b> {{exception_value|escape}}</code>{% endif %}<br/>
+		{% if epoch %}
+		  The developers have been notified.
+		  <br/>To help us solve this problem, can you type what you were trying to do just now into the box below?
+		{% else %}
+		  Our error logging is broken, however, so the developers haven't been notified.
+		{% endif %}
+	  </div>
+	  {% if epoch %}
+		<form action="{{post_url}}" method="POST">
+		  {% csrf_token %}
+		  <input type="hidden" name="epoch" value="{{epoch}}"/>
+		  <input type="hidden" name="simple_traceback" value="{{simple_traceback}}"/>
+		  <textarea id="id_user_notes" name="user_notes" value=""></textarea>
+		  <input class="submit_button" type="submit" value="Send Feedback"/>
+		</form>
+	  {% endif %}
 	</div>
 	<div class="traceback_area">
 		<div class="traceback_header">

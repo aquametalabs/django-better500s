@@ -1,20 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   	<script>window.jQuery || document.write('<script src="{{STATIC_URL}}better500s/js/jquery-1.6.2.min.js"><\/script>')</script>
 	<script type="text/javascript" charset="utf-8">
 		$(function() {
+		  {% if ajax_url %}
 			$.ajax({
 			  url: "{{ajax_url}}",
 			  type: "POST",
 			  dataType: "json",
-              data: {'epoch':{{epoch}}, 'simple_traceback':$("input[name=simple_traceback]").val() },
-				success: function() {
-					console.log("Saved")
-				},
-          });
+			  data: {'epoch': '{{epoch}}', 'simple_traceback': $("input[name=simple_traceback]").val()},
+			  success: function() {
+				console.log("Saved")
+			  },
+			});
+		  {% endif %}
 		  $("#id_user_notes").focus()
 		  $(".traceback_header").click(function(){
 			$(".traceback_detail").slideToggle("fast");

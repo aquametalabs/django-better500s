@@ -41,11 +41,10 @@ def create_caught_error(request, epoch, traceback, subject_prefix=""):
         pass
 
 def ajax_error_save(request):
-
     try:
-        if request.method == "POST" and "epoch" in request.POST:
-            epoch = int(request.POST["epoch"])
-            simple_traceback = request.POST['simple_traceback'].replace("\\n","\n\n")
+        if request.method == 'POST' and 'epoch' in request.POST and request.POST['epoch']:
+            epoch = int(request.POST['epoch'])
+            simple_traceback = request.POST['simple_traceback'].replace("\\n", "\n\n")
             create_caught_error(request, epoch, simple_traceback)
     except:
         print exception_string()

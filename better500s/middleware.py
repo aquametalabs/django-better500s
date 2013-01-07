@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseServerError, HttpResponseNotFound, Http404
 from django.template import Context
 from django.template.loader import render_to_string
@@ -62,8 +63,8 @@ class Better500s(object):
                 context['epoch'] = epoch
                 context['MEDIA_URL'] = getattr(settings, "MEDIA_URL", None)
                 context['STATIC_URL'] = getattr(settings, "STATIC_URL", None)
-                context['ajax_url'] = BETTER_500_AJAX_URL
-                context['post_url'] = BETTER_500_POST_URL
+                context['ajax_url'] = reverse(BETTER_500_AJAX_URL)
+                context['post_url'] = reverse(BETTER_500_POST_URL)
                 try:
                     exception_value = smart_unicode(exc_info[1])
                     if exception_value != u"":

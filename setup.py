@@ -11,7 +11,7 @@ setup(
     author = "Steven Skoczen",
     author_email = "steven@agoodcloud.com",
     url = "https://github.com/skoczen/django-better500s",
-    version = "0.42",
+    version = "0.2.1",
     packages = find_packages(),
     zip_safe = False,
     include_package_data=True,

@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 
 from better500s import BETTER_500_AJAX_URL, BETTER_500_POST_URL
 from better500s import views
